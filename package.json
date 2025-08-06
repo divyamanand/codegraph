@@ -9,7 +9,11 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:codegraph.helloWorld",
+    "onCommand:codegraph.showFolders",
+    "onCommand:codegraph.listFiles"
+  ],
   "main": "./src/extension.js",
   "contributes": {
     "commands": [{
@@ -19,6 +23,10 @@
     {
       "command": "codegraph.showFolders",
       "title": "Show Opened Folders"
+    },
+    {
+      "command": "codegraph.listFiles",
+      "title": "List All Files In Workspace"
     }
   ]
   },
