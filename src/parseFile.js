@@ -1,6 +1,6 @@
 const fs = require("fs")
 const path = require("path")
-const jsParser = require('./parsers/javascript/javascript')
+const {parseJS} = require('./parsers/javascript/javascript')
 
 
 function parseFile(filePath) {
@@ -11,10 +11,14 @@ function parseFile(filePath) {
         case ".js":
         case ".mjs":
         case ".ts":
-            return jsParser(content)
+        case ".jsx":
+        case ".tsx":
+            return parseJS(content)
         
         default:
             return []
     }
 }
 
+
+module.exports = {parseFile}

@@ -1,17 +1,12 @@
 const vscode = require("vscode");
 
 function showFolders() {
-    const folders = vscode.workspace.workspaceFolders;
-
-    if (!folders) {
-        return vscode.window.showErrorMessage("No folders opened");
-    }
-
-    const folderPaths = folders.map(folder => folder.uri.fsPath);
-    vscode.window.showInformationMessage('Folders:\n' + folderPaths.join("\n"));
-    console.log("Opened folders", folderPaths);
-
-    return folderPaths
+  const folders = vscode.workspace.workspaceFolders;
+  if (!folders) {
+    vscode.window.showErrorMessage("No folders opened");
+    return [];
+  }
+  return folders.map(f => f.uri.fsPath);
 }
 
 module.exports = { showFolders };

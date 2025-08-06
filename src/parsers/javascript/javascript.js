@@ -1,4 +1,4 @@
-module.exports = function parseJS(context) {
+function parseJS(context) {
     const regex = /(?:import\s+.*?\s+from\s+['"](.+?)['"])|(?:require\(['"](.+?)['"]\))/g
     const matches = []
 
@@ -10,3 +10,5 @@ module.exports = function parseJS(context) {
 
     return matches
 }
+
+module.exports = {parseJS}

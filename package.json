@@ -12,7 +12,7 @@
   "activationEvents": [
     "onCommand:codegraph.helloWorld",
     "onCommand:codegraph.showFolders",
-    "onCommand:codegraph.listFiles"
+    "onCommand:codegraph.filesMap"
   ],
   "main": "./src/extension.js",
   "contributes": {
@@ -25,8 +25,8 @@
       "title": "Show Opened Folders"
     },
     {
-      "command": "codegraph.listFiles",
-      "title": "List All Files In Workspace"
+      "command": "codegraph.filesMap",
+      "title": "Show files map"
     }
   ]
   },
