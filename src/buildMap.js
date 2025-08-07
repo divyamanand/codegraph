@@ -3,13 +3,21 @@ const { walk } = require("./listFiles");
 const { parseFile } = require("./parseFile");
 const path = require("path");
 
-function setNested(obj, keys, value) {
-    const lastKey = keys.pop();
-    const nested = keys.reduce((o, key) => {
-        if (!o[key]) o[key] = {};
-        return o[key];
-    }, obj);
-    nested[lastKey] = value;
+const VALID_EXTENSIONS = [".js", ".ts", ".jsx", ".tsx", ".mjs"];
+
+function setNested(map, filePath, deps) {
+    const parts = filePath.split(path.sep);
+    const fileName = parts.pop(); // Last part is file name
+    let curr = map;
+
+    for (const part of parts) {
+        if (!curr.folders) curr.folders = {};
+        if (!curr.folders[part]) curr.folders[part] = {};
+        curr = curr.folders[part];
+    }
+
+    if (!curr.files) curr.files = {};
+    curr.files[fileName] = { imports: deps };
 }
 
 async function buildMap() {
@@ -22,19 +30,18 @@ async function buildMap() {
         const files = await walk(folder);
 
         for (const file of files) {
+            const ext = path.extname(file);
+            if (!VALID_EXTENSIONS.includes(ext)) continue;
+
             const deps = parseFile(file);
             if (deps.length > 0) {
                 const relativePath = path.relative(folder, file);
-                const keys = relativePath.split(path.sep);
-                setNested(dependencyMap, keys, deps);
+                setNested(dependencyMap, relativePath, deps);
             }
         }
     }
 
     return dependencyMap;
 }
-
-module.exports = { buildMap };
-
 
 module.exports = { buildMap };

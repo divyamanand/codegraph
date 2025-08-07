@@ -1,24 +1,22 @@
 const fs = require("fs")
 const path = require("path")
-const {parseJS} = require('./parsers/javascript/javascript')
-
+const { parseJS } = require('./parsers/javascript/javascript')
 
 function parseFile(filePath) {
     const ext = path.extname(filePath)
     const content = fs.readFileSync(filePath, "utf-8")
 
-    switch (ext) {
-        case ".js":
-        case ".mjs":
-        case ".ts":
-        case ".jsx":
-        case ".tsx":
-            return parseJS(content)
-        
-        default:
-            return []
+    if (
+        ext === ".js" ||
+        ext === ".mjs" ||
+        ext === ".ts" ||
+        ext === ".jsx" ||
+        ext === ".tsx"
+    ) {
+        return parseJS(content)
+    } else {
+        return []
     }
 }
 
-
-module.exports = {parseFile}
+module.exports = { parseFile }
