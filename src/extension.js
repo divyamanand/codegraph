@@ -1,6 +1,6 @@
 const vscode = require("vscode");
-const { showFolders } = require("./folders");
-const { showMap } = require("./showMap");
+const { buildHierarchy } = require("./build/buildHierarchy");
+const { showMap } = require("./build/showMap");
 
 function activate(context) {
   context.subscriptions.push(
@@ -8,8 +8,34 @@ function activate(context) {
       "codegraph.helloWorld",
       () => vscode.window.showInformationMessage("Hello World from CodeGraph!")
     ),
-    vscode.commands.registerCommand("codegraph.showFolders", showFolders),
-    vscode.commands.registerCommand("codegraph.filesMap", showMap)
+
+    vscode.commands.registerCommand("codegraph.foldersMap", async () => {
+
+      const mapp = await showMap()
+
+      const srcRoot = {
+      name: "project-root",
+      folders: mapp.folders,
+      files: mapp.files
+    };
+
+      const { parentMap, childrenMap } = buildHierarchy(srcRoot);
+
+      const out = vscode.window.createOutputChannel("CodeGraph Dependencies");
+      out.clear();
+      out.appendLine("📂 Parent Map:\n" + JSON.stringify(parentMap, null, 2));
+      out.appendLine("\n📁 Children Map:\n" + JSON.stringify(childrenMap, null, 2));
+      out.show(true);
+    }),
+
+
+    vscode.commands.registerCommand("codegraph.filesMap", async () => {
+      const map = await showMap()
+      const out = vscode.window.createOutputChannel("CodeGraph Dependencies");
+      out.clear();
+      out.appendLine(JSON.stringify(map, null, 2))
+      out.show(true)
+    })
   );
 }
 
