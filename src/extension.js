@@ -1,5 +1,5 @@
 const vscode = require("vscode");
-const { showFolders } = require("./folders");
+const { buildHierarchy } = require("./build/buildHierarchy");
 const { showMap } = require("./showMap");
 
 function activate(context) {
@@ -8,7 +8,7 @@ function activate(context) {
       "codegraph.helloWorld",
       () => vscode.window.showInformationMessage("Hello World from CodeGraph!")
     ),
-    vscode.commands.registerCommand("codegraph.showFolders", showFolders),
+    vscode.commands.registerCommand("codegraph.foldersMap", buildHierarchy),
     vscode.commands.registerCommand("codegraph.filesMap", showMap)
   );
 }

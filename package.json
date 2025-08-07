@@ -11,7 +11,7 @@
   ],
   "activationEvents": [
     "onCommand:codegraph.helloWorld",
-    "onCommand:codegraph.showFolders",
+    "onCommand:codegraph.foldersMap",
     "onCommand:codegraph.filesMap"
   ],
   "main": "./src/extension.js",
@@ -21,7 +21,7 @@
       "title": "Hello World"
     },
     {
-      "command": "codegraph.showFolders",
+      "command": "codegraph.foldersMap",
       "title": "Show Opened Folders"
     },
     {
