@@ -13,10 +13,6 @@ function activate(context) {
 
       const mapp = await showMap()
 
-      console.log(mapp)
-      console.log(mapp.files)
-      console.log(mapp.folders)
-
       const srcRoot = {
       name: "project-root",
       folders: mapp.folders,
