@@ -31,7 +31,6 @@ function walk(dir, files = [], baseDir = dir, ig = null) {
             files.push(fullPath);
         }
     }
-
     return files;
 }
 
