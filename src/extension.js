@@ -1,6 +1,6 @@
 const vscode = require("vscode");
 const { buildHierarchy } = require("./build/buildHierarchy");
-const { showMap } = require("./showMap");
+const { showMap } = require("./build/showMap");
 
 function activate(context) {
   context.subscriptions.push(

@@ -1,5 +1,5 @@
 const vscode = require("vscode");
-const { buildMap } = require("./build/buildMap");
+const { buildMap } = require("./buildMap");
 
 async function showMap() {
   const map = await buildMap();

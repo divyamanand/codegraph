@@ -1,6 +1,6 @@
-const { showFolders } = require("../folders");
+const { showFolders } = require("./folders");
 const { walk } = require("./listFiles");
-const { parseFile } = require("../parseFile");
+const { parseFile } = require("./parseFile");
 const path = require("path");
 
 const VALID_EXTENSIONS = [".js", ".ts", ".jsx", ".tsx", ".mjs"];

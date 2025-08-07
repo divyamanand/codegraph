@@ -1,6 +1,6 @@
 const fs = require("fs")
 const path = require("path")
-const { parseJS } = require('./parsers/javascript/javascript')
+const { parseJS } = require('../parsers/javascript/javascript')
 
 function parseFile(filePath) {
     const ext = path.extname(filePath)
